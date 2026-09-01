@@ -1207,7 +1207,6 @@
 </section>
 
 <!-- MENU -->
-<!-- MENU -->
 <section class="menu-section" id="menu">
   <div class="container">
     <div class="fade-in">
@@ -1220,7 +1219,7 @@
       
       <!-- TOP MENU TABS -->
       <div class="menu-tabs" id="menuTabs">
-        <!-- Passing the PDF page number (1-4) and the button element (this) -->
+        <!-- Passing the PDF page number and the button element (this) -->
         <button class="menu-tab active" onclick="showMenuPage(1, this)">Food Menu</button>
         <button class="menu-tab" onclick="showMenuPage(2, this)">Appetizers</button>
         <button class="menu-tab" onclick="showMenuPage(3, this)">Main Course</button>
@@ -1230,14 +1229,13 @@
       <!-- PDF VIEWER -->
       <div class="menu-pages" id="menuPages" style="height: 700px; width: 100%; border-radius: 8px; overflow: hidden;">
         <!-- Loads the first page of the PDF by default -->
-        <iframe id="pdfViewer" src="Jolly Villa Menu Latest.pdf#page=1&toolbar=0&navpanes=0" width="100%" height="100%" style="border: none;">
-          <p>Your browser does not support PDFs. <a href="Jolly Villa Menu Latest.pdf">Download the menu</a>.</p>
+        <iframe id="pdfViewer" src="images/JVMENULatest.pdf#page=1&toolbar=0&navpanes=0" width="100%" height="100%" style="border: none;">
+          <p>Your browser does not support PDFs. <a href="images/JVMENULatest.pdf">Download the menu</a>.</p>
         </iframe>
       </div>
 
       <!-- BOTTOM MENU TABS -->
       <div class="menu-tabs" style="margin-top: 20px;">
-        <!-- Passing the PDF page number (5-6) and the button element (this) -->
         <button class="menu-tab" onclick="showMenuPage(5, this)">Fixed Menu Lunch &amp; Dinner</button>
         <button class="menu-tab" onclick="showMenuPage(6, this)">Fixed Menu Breakfast &amp; High Tea</button>
       </div>
@@ -1245,7 +1243,6 @@
     </div>
   </div>
 </section>
-
   
 <!-- LOCATION -->
 <section class="location-section" id="location">
@@ -1332,20 +1329,23 @@
   footerObserver.observe(footer);
 
   // ─── MENU VIEWER ───
-  function showMenuPage(pageNumber, clickedTab) {
-    // 1. Update the iframe source to jump to the requested PDF page
-    const viewer = document.getElementById('pdfViewer');
-    viewer.src = `Jolly Villa Menu Latest.pdf#page=${pageNumber}&toolbar=0&navpanes=0`;
+  function showMenuPage(pageNumber, clickedButton) {
+    // 1. Find the iframe
+    const pdfViewer = document.getElementById('pdfViewer');
+    
+    // 2. Update the iframe source to jump to the requested page
+    // Make sure this path exactly matches your GitHub folder structure
+    pdfViewer.src = `images/JVMENULatest.pdf#page=${pageNumber}&toolbar=0&navpanes=0`;
 
-    // 2. Remove the 'active' class from all menu tabs
+    // 3. Remove the 'active' class from ALL buttons
     const allTabs = document.querySelectorAll('.menu-tab');
     allTabs.forEach(tab => {
       tab.classList.remove('active');
     });
 
-    // 3. Add the 'active' class to the tab that was just clicked
-    if (clickedTab) {
-      clickedTab.classList.add('active');
+    // 4. Add the 'active' class only to the button that was just clicked
+    if (clickedButton) {
+      clickedButton.classList.add('active');
     }
   }
 
